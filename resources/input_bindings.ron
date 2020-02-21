@@ -1,0 +1,7 @@
+(
+    axes: {
+    },
+    actions: {
+        "click": [ [Mouse(Left)] ]
+    }
+)

@@ -1,5 +1,6 @@
 use amethyst::{
-    assets::{AssetStorage, Loader, Handle},
+    assets::{AssetStorage, Loader},
+    input::{is_mouse_button_down, get_mouse_button},
     core::transform::Transform,
     prelude::*,
     window::ScreenDimensions,
@@ -40,6 +41,15 @@ impl SimpleState for MainState {
         event: StateEvent,
     ) -> SimpleTrans {
         
+        if let StateEvent::Window(event) = &event {
+            let (mouse_button, _hmm) = get_mouse_button(&event).unwrap();
+
+            if is_mouse_button_down(&event, mouse_button) {
+                
+                // Something something event channels
+            }
+        }
+
         Trans::None
     }
 }
