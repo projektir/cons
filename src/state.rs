@@ -6,6 +6,8 @@ use amethyst::{
     renderer::{Camera, ImageFormat, SpriteSheetFormat, SpriteSheet, SpriteRender, Texture},
 };
 
+use crate::core::Core;
+
 pub struct MainState;
 
 impl SimpleState for MainState {
@@ -16,8 +18,20 @@ impl SimpleState for MainState {
 
         init_camera(world, &dimensions);
 
+        world.register::<Core>();
+
         let sprites = load_sprites(world);
-        init_sprites(world, &sprites, &dimensions);
+
+        let x = (0 as f32 - 1.) * 32. + dimensions.width() * 0.5;
+        let y = (0 as f32 - 1.) * 32. + dimensions.height() * 0.5;
+        let mut transform = Transform::default();
+        transform.set_translation_xyz(x, y, 0.);
+
+        create_core(world, transform, &sprites);
+
+        let mut transform = Transform::default();
+        transform.set_translation_xyz(700.0, 500.0, 0.);
+        create_core(world, transform, &sprites);
     }
 
     fn handle_event(
@@ -71,16 +85,13 @@ fn load_sprites(world: &mut World) -> Vec<SpriteRender> {
     })
 }
 
-fn init_sprites(world: &mut World, sprites: &[SpriteRender], dimensions: &ScreenDimensions) {
-    for (i, sprite) in sprites.iter().enumerate() {
-        let x = (i as f32 - 1.) * 32. + dimensions.width() * 0.5;
-        let y = (i as f32 - 1.) * 32. + dimensions.height() * 0.5;
-        let mut transform = Transform::default();
-        transform.set_translation_xyz(x, y, 0.);
+fn create_core(world: &mut World, transform: Transform, sprites: &[SpriteRender]) {
+    for (_, sprite) in sprites.iter().enumerate() {
         world
             .create_entity()
             .with(sprite.clone())
-            .with(transform)
+            .with(Core::new())
+            .with(transform.clone())
             .build();
     }
 }

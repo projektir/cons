@@ -12,6 +12,7 @@ use amethyst::{
 use log::info;
 
 mod state;
+mod core;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
