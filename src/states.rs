@@ -1,10 +1,10 @@
 use amethyst::{
     assets::{AssetStorage, Loader},
-    input::{is_mouse_button_down, get_mouse_button},
     core::transform::Transform,
+    input::{get_mouse_button, is_mouse_button_down},
     prelude::*,
+    renderer::{Camera, ImageFormat, SpriteRender, SpriteSheet, SpriteSheetFormat, Texture},
     window::ScreenDimensions,
-    renderer::{Camera, ImageFormat, SpriteSheetFormat, SpriteSheet, SpriteRender, Texture},
 };
 
 use crate::core::Core;
@@ -40,12 +40,11 @@ impl SimpleState for MainState {
         mut _data: StateData<'_, GameData<'_, '_>>,
         event: StateEvent,
     ) -> SimpleTrans {
-        
         if let StateEvent::Window(event) = &event {
             let (mouse_button, _hmm) = get_mouse_button(&event).unwrap();
 
             if is_mouse_button_down(&event, mouse_button) {
-                
+
                 // Something something event channels
             }
         }
@@ -89,10 +88,10 @@ fn load_sprites(world: &mut World) -> Vec<SpriteRender> {
         )
     };
 
-    vec!(SpriteRender {
+    vec![SpriteRender {
         sprite_sheet: sheet_handle.clone(),
         sprite_number: 0,
-    })
+    }]
 }
 
 fn create_core(world: &mut World, transform: Transform, sprites: &[SpriteRender]) {

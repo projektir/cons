@@ -1,7 +1,7 @@
 use amethyst::{
-    input::{InputHandler, StringBindings},
     derive::SystemDesc,
     ecs::{Read, System, SystemData},
+    input::{InputHandler, StringBindings},
 };
 
 #[derive(SystemDesc)]

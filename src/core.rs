@@ -1,14 +1,10 @@
-use amethyst::{
-    ecs::prelude::{Component, DenseVecStorage},
-};
+use amethyst::ecs::prelude::{Component, DenseVecStorage};
 
-pub struct Core {
-    
-}
+pub struct Core {}
 
 impl Core {
     pub fn new() -> Core {
-        Core { }
+        Core {}
     }
 }
 

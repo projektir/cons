@@ -1,7 +1,7 @@
 use amethyst::{
     core::transform::TransformBundle,
-    prelude::*,
     input::{InputBundle, StringBindings},
+    prelude::*,
     renderer::{
         plugins::{RenderFlat2D, RenderToWindow},
         types::DefaultBackend,
@@ -29,11 +29,10 @@ fn main() -> amethyst::Result<()> {
 
     info!("Hello, world!");
 
-    let input_bundle = InputBundle::<StringBindings>::new()
-        .with_bindings_from_file(input_bindings)?;
+    let input_bundle =
+        InputBundle::<StringBindings>::new().with_bindings_from_file(input_bindings)?;
 
     let game_data = GameDataBuilder::default()
-        
         .with_bundle(TransformBundle::new())?
         .with_bundle(input_bundle)?
         .with_bundle(
@@ -44,7 +43,11 @@ fn main() -> amethyst::Result<()> {
                 )
                 .with_plugin(RenderFlat2D::default()),
         )?
-        .with(MainSystem { pressed: false }, "main_system", &["input_system"]);
+        .with(
+            MainSystem { pressed: false },
+            "main_system",
+            &["input_system"],
+        );
 
     let mut game = Application::new(resources, states::MainState, game_data)?;
     game.run();
